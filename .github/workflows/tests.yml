@@ -1,0 +1,78 @@
+name: Tests and Coverage
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    # Backend tests
+    - name: Install backend dependencies
+      working-directory: ./backend
+      run: npm install
+
+    - name: Run backend tests
+      working-directory: ./backend
+      run: npm test
+
+    - name: Upload backend coverage to Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ./backend/coverage/lcov.info
+        flag-name: backend
+        parallel: true
+
+    # Frontend tests
+    - name: Install frontend dependencies
+      working-directory: ./frontend
+      run: npm install
+
+    - name: Run frontend tests
+      working-directory: ./frontend
+      run: npm test -- --coverage --watchAll=false
+
+    - name: Upload frontend coverage to Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ./frontend/coverage/lcov.info
+        flag-name: frontend
+        parallel: true
+
+    # Lint code
+    - name: Lint backend code
+      working-directory: ./backend
+      run: npm run lint || true
+
+    - name: Lint frontend code
+      working-directory: ./frontend
+      run: npm run lint || true
+
+  # Finalize Coveralls parallel uploads
+  coveralls-finish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Finalize Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel-finished: true

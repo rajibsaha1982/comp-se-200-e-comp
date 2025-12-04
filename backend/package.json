@@ -1,0 +1,33 @@
+{
+  "name": "ecommerce-food-store-backend",
+  "version": "1.0.0",
+  "description": "REST API backend for e-commerce food store",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --no-coverage",
+    "test:watch": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --watch",
+    "lint": "eslint 'src/**/*.js' 'tests/**/*.js'",
+    "lint:fix": "eslint 'src/**/*.js' 'tests/**/*.js' --fix"
+  },
+  "keywords": [
+    "api",
+    "ecommerce",
+    "rest"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0",
+    "eslint": "^8.54.0",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  }
+}

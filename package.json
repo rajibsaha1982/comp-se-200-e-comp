@@ -1,0 +1,31 @@
+{
+  "name": "ecommerce-food-store",
+  "version": "1.0.0",
+  "description": "E-commerce application for selling food products from small producers",
+  "main": "backend/src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/src/server.js",
+    "dev": "npm run dev:backend & npm run dev:frontend",
+    "dev:backend": "cd backend && node src/server.js",
+    "dev:frontend": "cd frontend && npm start",
+    "test": "npm run test:coverage",
+    "test:backend": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test -- --coverage",
+    "test:coverage": "cd backend && npm test -- --coverage --collectCoverageFrom=\"src/**/*.js\" --coverageReporters=text",
+    "build": "npm run build:frontend",
+    "build:frontend": "cd frontend && npm run build",
+    "lint": "eslint 'backend/src/**/*.js' 'frontend/src/**/*.{js,jsx}'",
+    "lint:fix": "eslint 'backend/src/**/*.js' 'frontend/src/**/*.{js,jsx}' --fix"
+  },
+  "keywords": [
+    "ecommerce",
+    "food",
+    "producers"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.54.0"
+  }
+}
