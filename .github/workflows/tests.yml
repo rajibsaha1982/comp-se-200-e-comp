@@ -21,7 +21,24 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+
+    # Cache backend dependencies
+    - name: Cache backend dependencies
+      uses: actions/cache@v4
+      with:
+        path: backend/node_modules
+        key: ${{ runner.os }}-node-${{ matrix.node-version }}-backend-${{ hashFiles('backend/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-${{ matrix.node-version }}-backend-
+
+    # Cache frontend dependencies
+    - name: Cache frontend dependencies
+      uses: actions/cache@v4
+      with:
+        path: frontend/node_modules
+        key: ${{ runner.os }}-node-${{ matrix.node-version }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-${{ matrix.node-version }}-frontend-
 
     # Backend tests
     - name: Install backend dependencies
