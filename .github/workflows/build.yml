@@ -77,6 +77,15 @@ jobs:
         name: backend-coverage
         path: backend/coverage/
 
+    - name: Upload coverage to Coveralls
+      uses: coverallsapp/github-action@v2
+      if: always()
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ./backend/coverage/lcov.info
+        flag-name: backend-build
+        parallel: false
+
     - name: Create job summary
       if: always()
       run: |

@@ -60,6 +60,15 @@ jobs:
         name: backend-coverage-${{ matrix.node-version }}
         path: backend/coverage/
 
+    - name: Upload backend coverage to Coveralls
+      uses: coverallsapp/github-action@v2
+      if: always()
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ./backend/coverage/lcov.info
+        flag-name: backend-node-${{ matrix.node-version }}
+        parallel: true
+
     # Frontend tests
     - name: Install frontend dependencies
       working-directory: ./frontend
@@ -76,6 +85,15 @@ jobs:
         name: frontend-coverage-${{ matrix.node-version }}
         path: frontend/coverage/
 
+    - name: Upload frontend coverage to Coveralls
+      uses: coverallsapp/github-action@v2
+      if: always()
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ./frontend/coverage/lcov.info
+        flag-name: frontend-node-${{ matrix.node-version }}
+        parallel: true
+
     # Lint code
     - name: Lint backend code
       working-directory: ./backend
@@ -91,7 +109,7 @@ jobs:
     runs-on: ubuntu-latest
     if: always()
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Create comprehensive test summary
         run: |
@@ -128,3 +146,15 @@ jobs:
           echo "### 📝 Node.js Versions Tested" >> $GITHUB_STEP_SUMMARY
           echo "- ✅ Node.js 18.x" >> $GITHUB_STEP_SUMMARY
           echo "- ✅ Node.js 20.x" >> $GITHUB_STEP_SUMMARY
+
+  # Coveralls finalize job
+  coveralls-finish:
+    needs: test
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Finalize Coveralls coverage
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel-finished: true
