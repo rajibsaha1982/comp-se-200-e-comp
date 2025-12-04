@@ -48,7 +48,7 @@ export function isValidQuantity(quantity) {
  */
 export function sanitizeString(str) {
   if (typeof str !== 'string') return '';
-  return str.trim().replace(/[<>]/g, '');
+  return str.trim().replace(/<[^>]*>/g, '');
 }
 
 const validators = {

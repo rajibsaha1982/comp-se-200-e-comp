@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   testEnvironment: 'jsdom',
   coverageDirectory: 'coverage',
   collectCoverageFrom: [
@@ -11,9 +11,15 @@ export default {
   ],
   setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
   testMatch: [
-    '**/tests/**/*.test.{js,jsx}'
+    '<rootDir>/tests/**/*.test.{js,jsx}'
   ],
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy'
+  },
+  testPathIgnorePatterns: [
+    '/node_modules/'
+  ],
+  transform: {
+    '^.+\\.(js|jsx)$': 'babel-jest'
   }
 };

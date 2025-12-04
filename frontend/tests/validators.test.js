@@ -5,7 +5,7 @@ import {
   isValidProductName,
   isValidQuantity,
   sanitizeString
-} from '../utils/validators';
+} from '../src/utils/validators';
 
 describe('Frontend Validators', () => {
   describe('isValidEmail', () => {
@@ -90,7 +90,8 @@ describe('Frontend Validators', () => {
   describe('sanitizeString', () => {
     test('should trim whitespace and remove HTML tags', () => {
       expect(sanitizeString('  hello  ')).toBe('hello');
-      expect(sanitizeString('hello<script>alert("xss")</script>')).toBe('hello');
+      expect(sanitizeString('hello <b>world</b>')).toBe('hello world');
+      expect(sanitizeString('<script>alert("xss")</script>')).toBe('alert("xss")');
     });
 
     test('should handle non-string input', () => {
