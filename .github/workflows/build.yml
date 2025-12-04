@@ -60,9 +60,9 @@ jobs:
 
     - name: Validate project structure
       run: |
-        echo "✅ Backend validators: $(find backend/src/validators -name '*.js' | wc -l) files"
-        echo "✅ Backend tests: $(find backend/tests -name '*.test.js' | wc -l) suites"
-        echo "✅ Frontend components: $(find frontend/src/components -name '*.js' | wc -l) files"
+        echo "Backend validators: $(find backend/src/validators -name '*.js' | wc -l) files"
+        echo "Backend tests: $(find backend/tests -name '*.test.js' | wc -l) suites"
+        echo "Frontend components: $(find frontend/src/components -name '*.js' | wc -l) files"
 
     - name: Upload frontend build artifact
       uses: actions/upload-artifact@v4
@@ -89,15 +89,15 @@ jobs:
     - name: Create job summary
       if: always()
       run: |
-        echo "## 🏗️ Build Summary" >> $GITHUB_STEP_SUMMARY
+        echo "## Build Summary" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "| Component | Status |" >> $GITHUB_STEP_SUMMARY
         echo "|-----------|--------|" >> $GITHUB_STEP_SUMMARY
-        echo "| Backend Setup | ✅ Passed |" >> $GITHUB_STEP_SUMMARY
-        echo "| Backend Tests | ✅ 148 passing |" >> $GITHUB_STEP_SUMMARY
-        echo "| Frontend Build | ✅ Passed |" >> $GITHUB_STEP_SUMMARY
+        echo "| Backend Setup | Passed |" >> $GITHUB_STEP_SUMMARY
+        echo "| Backend Tests | 148 passing |" >> $GITHUB_STEP_SUMMARY
+        echo "| Frontend Build | Passed |" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### 📊 Test Coverage" >> $GITHUB_STEP_SUMMARY
+        echo "### Test Coverage" >> $GITHUB_STEP_SUMMARY
         echo "- Statements: 84.25%" >> $GITHUB_STEP_SUMMARY
         echo "- Branches: 74.11%" >> $GITHUB_STEP_SUMMARY
         echo "- Functions: 85.22%" >> $GITHUB_STEP_SUMMARY
