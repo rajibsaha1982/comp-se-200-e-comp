@@ -1,7 +1,7 @@
 /**
  * Shopping Cart Component
  */
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
 import { formatPrice } from '../utils/validators';
 import './ShoppingCart.css';

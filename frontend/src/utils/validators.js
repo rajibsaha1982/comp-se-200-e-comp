@@ -51,7 +51,7 @@ export function sanitizeString(str) {
   return str.trim().replace(/[<>]/g, '');
 }
 
-export default {
+const validators = {
   isValidEmail,
   isValidPrice,
   formatPrice,
@@ -59,3 +59,5 @@ export default {
   isValidQuantity,
   sanitizeString
 };
+
+export default validators;
