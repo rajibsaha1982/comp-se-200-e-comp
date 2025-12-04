@@ -15,10 +15,10 @@ jobs:
         node-version: [18.x, 20.x]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
@@ -36,13 +36,12 @@ jobs:
       working-directory: ./backend
       run: npm test -- --coverage --coverageReporters=lcov --collectCoverageFrom="src/**/*.js" || true
 
-    - name: Upload backend coverage to Coveralls
-      uses: coverallsapp/github-action@master
+    - name: Upload backend coverage report
+      uses: actions/upload-artifact@v4
+      if: always()
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./backend/coverage/lcov.info
-        flag-name: backend
-        parallel: true
+        name: backend-coverage-${{ matrix.node-version }}
+        path: backend/coverage/
 
     # Frontend tests
     - name: Install frontend dependencies
@@ -53,13 +52,12 @@ jobs:
       working-directory: ./frontend
       run: npm test -- --coverage --watchAll=false
 
-    - name: Upload frontend coverage to Coveralls
-      uses: coverallsapp/github-action@master
+    - name: Upload frontend coverage report
+      uses: actions/upload-artifact@v4
+      if: always()
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./frontend/coverage/lcov.info
-        flag-name: frontend
-        parallel: true
+        name: frontend-coverage-${{ matrix.node-version }}
+        path: frontend/coverage/
 
     # Lint code
     - name: Lint backend code
