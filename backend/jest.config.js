@@ -4,7 +4,7 @@ export default {
   coverageDirectory: 'coverage',
   collectCoverageFrom: [
     'src/**/*.js',
-    '!src/**/index.js',
+    '!src/validators/index.js',
     '!src/validators/isEmpty.js',
     '!src/validators/toString.js',
     '!src/validators/toNumber.js',
