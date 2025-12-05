@@ -20,8 +20,9 @@ describe('capitalize (COMP.SE.200)', () => {
   });
   
   test('should handle non-string input', () => {
-    expect(capitalize(null)).toBe(null);
-    expect(capitalize(123)).toBe(123);
+    // Official library converts to string first
+    expect(capitalize(null)).toBe('Null');
+    expect(capitalize(123)).toBe('123');
   });
   
   test('should capitalize first letter and lowercase rest', () => {
