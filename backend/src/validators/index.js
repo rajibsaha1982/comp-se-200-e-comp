@@ -3,14 +3,14 @@
  * Combines all individual validator functions
  */
 
-// COMP.SE.200 Official Utilities
-export { isEmpty } from './isEmpty.js'
-export { toString } from './toString.js'
-export { toNumber } from './toNumber.js'
-export { capitalize } from './capitalize.js'
-export { camelCase } from './camelCase.js'
-export { isBoolean } from './isBoolean.js'
-export { isObject } from './isObject.js'
+// COMP.SE.200 Official Utilities (direct imports from lib)
+export { default as isEmpty } from '../lib/isEmpty.js'
+export { default as toString } from '../lib/toString.js'
+export { default as toNumber } from '../lib/toNumber.js'
+export { default as capitalize } from '../lib/capitalize.js'
+export { default as camelCase } from '../lib/camelCase.js'
+export { default as isBoolean } from '../lib/isBoolean.js'
+export { default as isObject } from '../lib/isObject.js'
 
 // Custom Validators
 export { isValidEmail } from './isValidEmail.js'
