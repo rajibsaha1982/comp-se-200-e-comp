@@ -44,10 +44,8 @@ Thumbs.db
 # Test
 .jest_cache
 
-# Local Documentation (keep README.md and other core files, ignore generated docs)
-COVERAGE_REPORT.md
-TEST_REPORT.md
-TEST_EXECUTION_GUIDE.md
+# Local Documentation - All markdown files kept locally only
+*.md
 TEST_PLAN.md
 CLEAN_RUN_REPORT.md
 
